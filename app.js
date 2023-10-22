@@ -1,9 +1,10 @@
-import router from "./routes/User";
+
 import express from "express";
 import mongoose from "mongoose";
-import { getUsers } from "./controllers/User";
+import router from "./routes/User";
 
 const app = express();
+app.use(express.json());
 app.use("/api/users", router);
 
 mongoose
