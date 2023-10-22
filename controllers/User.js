@@ -24,14 +24,19 @@ export const signup = async (req, res, next) => {
       return res.status(400).json({ message: "User already exists" });
     }
     const hashedPassword = bcrypt.hashSync(password, 12);
-    const user = await User.create({ name, email, password: hashedPassword });
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      blogs: [],
+    });
     res.status(201).json({ user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const getUserById = async (req, res) => {
+export const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     res.json(user);
